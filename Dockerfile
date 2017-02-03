@@ -47,6 +47,6 @@ COPY www.strongniche.com.tw.conf /etc/apache2/sites-enabled
 #
 #COPY spine.conf /etc/cacti/spine.conf
 #
-EXPOSE 7780
+EXPOSE 80
 #
 CMD ["/usr/bin/supervisord"]
