@@ -7,10 +7,12 @@ Docker container for [LAMP Yoda][1]
 
 ## Usage
 To build the docker image which refers to Dockerfile using the command below:
-    $ docker build --build-arg MYSQL_PASSWORD=xxxxxx -t "tonycheng/web1:0.0.1" .
+
+$ docker build --build-arg MYSQL_PASSWORD=xxxxxx -t "tonycheng/web1:0.0.1" ./
 
 To run container use the command below:
-    $ docker run -t -d -v /root/docker-web1/html:/var/www/html -p 80:80 tonychengtw/web1:0.0.1 /bin/bash
+
+$ docker run -t -d --name web1 -v /root/docker-web1/html:/var/www/html -p 80:80 tonycheng/web1:0.0.1
 
 ## Data store
 To backup use the command below:
