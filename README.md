@@ -14,6 +14,9 @@ To run container use the command below:
 
 $ docker run -t -d --name web1 -v /root/docker-web1/html:/var/www/html -p 80:80 tonycheng/web1:0.0.1
 
+## Docker Ignore File
+Please refer .dockeringore
+
 ## Data store
 To backup use the command below:
 

@@ -14,24 +14,32 @@ RUN echo "mysql-server-5.5 mysql-server/root_password password ${MYSQL_PASSWORD}
 RUN echo "mysql-server-5.5 mysql-server/root_password_again password ${MYSQL_PASSWORD}"| debconf-set-selections
 RUN apt-get update && apt-get install -yq  build-essential \ 
                       supervisor \
-#                      htop vim net-tools git curl wget  \
-#                      apache2 libapache2-mod-php5 php5-mysql php5-gd php5-curl php-pear php-apc \		
+                      htop vim net-tools git curl wget lrzsz \
+                      apache2 libapache2-mod-php5 php5-mysql php5-gd php5-curl php-pear php-apc \		
                       mysql-server-5.5 
 
-#WORKDIR /root/yoda-web
+WORKDIR /root
+
 # copy supervisord related files
 COPY supervisord.conf /etc/supervisor
 COPY supervisord-apache2.conf /etc/supervisor/conf.d/
 COPY supervisord-mysql.conf /etc/supervisor/conf.d/
 
 
-# copy apache related files
+# copy apache related files and enable modules
 COPY www.strongniche.com.tw.conf /etc/apache2/sites-enabled
+RUN /usr/sbin/a2enmod rewrite.load
 
+# change owner permission to /var/www
+RUN chown -R www-data:www-data /var/www/
+
+# restore DB
 #COPY allDB.sql.gz ./
 #RUN gunzip allDB.sql.gz
-#RUN mysqld &
-#RUN mysql -u root -p${MYSQL_PASSWORD} < allDB.sql
+#RUN /usr/bin/supervisord &
+#RUN /usr/bin/mysqld &
+#RUN /usr/sbin/mysql -u root -p${MYSQL_PASSWORD} -h 127.0.0.1 < allDB.sql
+#RUN killall supervisord
 
 # to add mysqld deamon to runit
 #RUN mkdir -p /etc/service/snmpd /var/log/snmpd ; sync 
