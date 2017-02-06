@@ -12,7 +12,7 @@ $ docker build --build-arg MYSQL_PASSWORD=xxxxxx -t "tonycheng/web1:0.0.8" ./
 
 To run container use the command below:
 
-$ docker run -t -d --name web1 -v /sdb1/docker-volume/web1/:/var/www/html -p 80:80 tonycheng/web1:0.0.8
+$ docker run -t -d --name web1 -v /sdb1/docker-volume/web1/:/var/www/html -p 80:80 tonychengtw/web1:0.0.8
 
 ## Docker Ignore File
 Please refer .dockeringore
